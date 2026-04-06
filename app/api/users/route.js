@@ -6,6 +6,7 @@ let users = [
   { id: 3, name: "Saikat Ghosh", email: "saikat@gmail.com" },
 ];
 
+// get endpoint
 export const GET = async () => {
   try {
     return NextResponse.json({
@@ -23,3 +24,33 @@ export const GET = async () => {
   }
 };
 
+// post endpoint
+export const POST = async (req) => {
+  try {
+    const body = await req.json();
+
+    if (!body.name || !body.email) {
+      return NextResponse.json(
+        { message: "Name and email are required" },
+        { status: 400 },
+      );
+    }
+
+    const newUser = {
+      id: Date.now(),
+      name: body.name,
+      email: body.email,
+    };
+
+    users.push(newUser);
+
+    return NextResponse.json(newUser, { status: 201 });
+  } catch (error) {
+    console.error("Failed to create user", error);
+
+    return NextResponse.json(
+      { message: "Internal Server Error" },
+      { status: 500 },
+    );
+  }
+};
