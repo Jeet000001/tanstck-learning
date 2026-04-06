@@ -1,3 +1,4 @@
+import UsersList from '@/components/UsersList'
 import React from 'react'
 
 const page = () => {
@@ -9,7 +10,7 @@ const page = () => {
       </div>
       <div className='lg:flex justify-between px-20 gap-5'>
         <div>form</div>
-        <div>email</div>
+        <div><UsersList /></div>
       </div>
     </div>
   )
